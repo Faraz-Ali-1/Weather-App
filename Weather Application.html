@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Butcherman&family=Croissant+One&family=Indie+Flower&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mooli&family=Orbitron:wght@400..900&family=Pacifico&family=Permanent+Marker&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tourney:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="weather_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <title>WeatherLy</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: rgb(236, 236, 236);
+            font-family: roboto, sans-serif;
+            color: var(--main-color);
+            scroll-behavior: smooth;
+        }
+        :root{
+            --main-color: rgb(0, 0, 0);
+            --secondary-color: rgb(70, 70, 70);
+        }
+        .container{
+            max-width: 900px;
+            min-width: 350px;
+            margin: auto;
+        }
+
+        /* ****************** */
+        /* header starts here */
+        /* ****************** */
+
+        .live{
+            text-align: center;
+            background-color: black;
+            padding: 0.2rem;
+            min-width: 350px;
+            margin: auto;
+        }
+        .live img{
+            width: 0.6rem;
+            animation: live infinite 1s linear;
+        }
+        .live p{
+            color: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            max-width: fit-content;
+            margin: auto;
+        }
+        .container{
+            box-shadow: 0px 0px 2px 4px rgba(0, 0, 0, 0.3);
+            border-radius: 0rem;
+            padding: 1rem;
+            background-color: rgb(255, 255, 255);
+        }
+        .logo-container{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container .logo{
+            font-weight: 300;
+            font-size: 2.5rem;
+            z-index: 1;
+            max-width: fit-content;
+        }
+        .logo-container input{
+            width: 15rem;
+            height: 2rem;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid rgb(150, 150, 150);
+            background: transparent;
+            font-size: 1rem;
+            color: var(--secondary-color);
+            padding: 0 0.2rem;
+        }
+        input:focus{
+            border-bottom: 1px solid black;
+            transition: 0.2s;
+        }
+
+        /* **************** */
+        /* header ends here */
+        /* **************** */
+
+        /* ******************* */
+        /* weather starts here */
+        /* ******************* */
+
+        
+        .weather{
+            padding: 4rem 0;
+        }
+        .main{
+            margin: auto;
+            text-align: center;
+        }
+        .weather .city{
+            font-size: 2.4rem;
+            font-weight: 400;
+            padding-bottom: 0.4rem;
+        }
+        .weather .time{
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+            margin-bottom: -2rem;
+        }
+        .icon{
+            height: 10rem;
+            /* margin: auto; */
+        }
+        .temp_container{
+            display: flex;
+            align-items:center;
+            margin: auto;
+            justify-content: center;
+        }
+        .temp_container .temp{
+            font-size: 2.5rem;
+            margin-left: 0.5rem;
+            margin-top: 0.5rem;
+            border-right: 1px solid var(--secondary-color);
+            padding-right: 0.3rem;
+
+        }
+        .temp_container .desc{
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            padding-left: 0.4rem;
+            height: 0.9rem;
+            
+        }
+
+
+        .attributes{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem 1rem;
+            margin-top: 4rem;
+        }
+        .flex{
+            display: flex;
+            column-gap: 1rem;
+            padding: 0.8rem 0.6rem;
+            border-radius: 0.5rem;
+            flex-basis: 48%;
+            align-items: center;
+        }
+        .flex i{
+            font-size: 1.5rem;
+        }
+        .flex h3{
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+        .flex p{
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+        .flex ion-icon{
+            font-size: 1.4rem;
+        }
+
+        .feels-like{
+            background-color: rgb(227, 255, 185);
+        }
+        .feels-like i, .feel{
+            color: rgb(0, 110, 0);
+        }
+        .feels-like p{
+            color: rgb(32, 148, 32);
+        }
+
+        .Humidity{
+            background-color: rgb(209, 209, 209);
+        }
+        .Humidity i, .humid{
+            color: rgb(81, 81, 81);
+        }
+        .Humidity p{
+            color: rgb(108, 108, 108);
+        }
+
+        .Wind{
+            background-color: rgb(212, 246, 255);
+        }
+        .Wind i, .win{
+            color: rgb(0, 106, 255);
+        }
+        .Wind p{
+            color: rgb(37, 135, 255);
+        }
+
+        .Pressure{
+            background-color: rgb(255, 233, 193);
+        }
+        .Pressure i, .press{
+            color: rgb(255, 166, 0);
+        }
+        .Pressure p{
+            color: rgb(255, 180, 41);
+        }
+
+        .Precipitation{
+            background-color: rgb(226, 208, 255);
+        }
+        .Precipitation ion-icon, .precip{
+            color: rgb(126, 51, 255);
+        }
+        .Precipitation p{
+            color: rgb(143, 78, 255);
+        }
+
+        .uv-index{
+            background-color: rgb(255, 255, 183);
+        }
+        .uv-index ion-icon, .uv{
+            color: rgb(178, 178, 0);
+        }
+        .uv-index p{
+            color: rgb(216, 216, 0);
+        }
+
+        /* ***************** */
+        /* weather ends here */
+        /* ***************** */
+
+        /* ***************** */
+        /* Responsive design */
+        /* ***************** */
+
+        @media screen and (max-width: 432px){
+            .logo-container .logo{
+                font-size: 2rem;
+            }
+            .logo-container input{
+                width: 9rem;
+            }
+            .attributes{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+            }
+            .flex{
+                display: block;
+                flex-basis: 40%;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+            .flex i, h3, ion-icon{
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="live">
+        <p><img src="live.png" alt="red dot"> Live Weather Forecast</p>
+    </div>
+
+    <div class="container">
+        <div class="logo-container">
+            <p class="logo">WeatherLy.</p>
+            <form action="submit" id="search_form">
+                <input type="search" name="search" id="search" placeholder="Search...">
+            </form>
+        </div>
+
+        <!-- ------------------- -->
+        <!-- weather starts here -->
+        <!-- ------------------- -->
+
+        <div class="weather">
+            <div class="main">
+                <h1 class="city" id="city"></h1>
+                <p class="time" id="time"></p>
+
+                <div class="icon" id="weather_icon"></div>
+                
+                <div class="temp_container">
+                    <p class="temp" id="temp">12&#176;</p>
+                    <p class="desc" id="desc">clear</p>
+                </div>
+
+            </div>
+
+
+            <div class="attributes">
+
+                <div class="feels-like flex">
+                    <div class="attr-icon">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+                    <div class="attr-desc">
+                        <h3 class="feel">Feels like</h3>
+                        <p id="feels_like"></p>
+                    </div>
+                </div>
+
+                <div class="Humidity flex">
+                    <div class="attr-icon">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <div class="attr-desc">
+                        <h3 class="humid">Humidity</h3>
+                        <p id="humidity"></p>
+                    </div>
+                </div>
+
+                <div class="Wind flex">
+                    <div class="attr-icon">
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <div class="attr-desc">
+                        <h3 class="win">Wind</h3>
+                        <p id="wind"></p>
+                    </div>
+                </div>
+
+                <div class="Pressure flex">
+                    <div class="attr-icon">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <div class="attr-desc">
+                        <h3 class="press">Pressure</h3>
+                        <p id="pressure"></p>
+                    </div>
+                </div>
+
+                <div class="Precipitation flex">
+                    <div class="attr-icon">
+                        <ion-icon name="rainy"></ion-icon>
+                    </div>
+                    <div class="attr-desc">
+                        <h3 class="precip">Precipitation</h3>
+                        <p id="rain">21%</p>
+                    </div>
+                </div>
+
+                <div class="uv-index flex">
+                    <div class="attr-icon">
+                        <ion-icon name="sunny"></ion-icon>
+                    </div>
+                    <div class="attr-desc">
+                        <h3 class="uv">UV Index</h3>
+                        <p id="UV">3 - Low</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- ----------------- -->
+        <!-- weather ends here -->
+        <!-- ----------------- -->
+    </div>
+
+        <!-- -------------------------- -->
+        <!-- icons installation script  -->
+        <!-- -------------------------- -->
+    
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        <!-- ------------------ -->
+        <!-- script starts here -->
+        <!-- ------------------ -->
+
+
+    <script>
+        let weatherDesc = document.getElementById('desc');
+        let searchForm = document.getElementById('search_form');
+        let searchCity = document.getElementById('search');
+        let cityName = document.getElementById('city');
+        let time = document.getElementById('time');
+        let weatherIcon = document.getElementById('weather_icon');
+        let temp = document.getElementById('temp');
+        let feels_like = document.getElementById('feels_like');
+        let humid= document.getElementById('humidity');
+        let windspeed = document.getElementById('wind');
+        let pressure = document.getElementById('pressure');
+        let rainy = document.getElementById('rain');
+
+        // ==========================
+        // to get search input value
+        // ==========================
+
+        let city = "california";
+
+        searchForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            console.log(searchCity.value);
+            city = searchCity.value;
+
+            getWeatherdata();
+            searchCity.value = "";
+        })
+        
+        // =========================
+        // to get the country name
+        // =========================
+
+        const getCountryName = (code) => {
+            return new Intl.DisplayNames([code], {type: "region"}).of(code);
+        };
+
+
+        // =================
+        // to get the time
+        // =================
+
+        const getTime = (dt) => {
+            let curDate = new Date(dt * 1000);
+            console.log(curDate);
+
+            const options = {
+               weekday: "long",
+               year: "numeric",
+               month: "long",
+               day: "numeric",
+               hour: "numeric",
+               minute: "numeric",
+            };
+
+            const formatter = new Intl.DateTimeFormat("en-US", options);
+            return formatter.format(curDate);
+        };
+
+        // ==================
+        //        end
+        // ==================
+
+
+        const getWeatherdata = async () => {
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5ae60015630543092173ea6fa394bead`;
+            try {
+                const res = await fetch(weatherUrl);
+                const data = await res.json();
+                console.log(data);
+
+                // ====================
+                // making data dynamic 
+                // ====================
+
+                const {main, name, weather, wind, sys, dt} = data;
+
+                weatherDesc.innerText = weather[0].main;
+                cityName.innerText = `${name}, ${getCountryName(sys.country)}`;
+                time.innerText = getTime(dt);
+                weatherIcon.innerHTML = `
+                <img src = "https://openweathermap.org/img/wn/${weather[0].icon}@4x.png" />
+                `;
+                temp.innerHTML = `${(main.temp-273.15).toFixed()}&#176`;
+                feels_like.innerHTML = `${(main.feels_like-273.15).toFixed()}&#176`;
+                humid.innerText = `${main.humidity} g/m3`;
+                windspeed.innerText = `${wind.speed} Km/h`;
+                pressure.innerText = `${main.pressure} hpa`;
+                rainy.innerText = `${Math.random().toFixed(1)*100}%`;
+
+                if (weather[0].icon == "03d") {
+                    weatherIcon.style.filter = "drop-shadow(10px -6px gray)";
+                } else {
+                    weatherIcon.style.filter = "";
+                }
+
+            } catch (error) {
+                alert("City not found!");
+            }
+        }
+        getWeatherdata();
+    </script>
+
+</body>
+</html>
