@@ -1,26 +1,67 @@
-# Weather-App
+# WeatherLy
 
-This is a modern, responsive web application designed to provide users with up-to-date meteorological data including temperature, wind speed, precipitation forecasts, and detailed air quality metrics. The app retrieves real-time weather information from a third-party API and presents it through a clean, intuitive user interface.
+WeatherLy is a dynamic, real-time weather forecasting application. By integrating with the OpenWeatherMap API, it provides users with up-to-the-minute weather data for any city globally, featuring a clean, responsive interface and localized data formatting.
 
-**Key Features**
-Real-time Local Conditions: Displays current temperature, humidity, and atmospheric pressure for a specified location.
+---
 
+![img](https://github.com/Faraz-Ali-1/Weather-App/blob/bf83b9396889956dd50121dcf9dfdc0150a81cec/screenshots/weather%201.jpg)
 
-Detailed Metrics: Provides specific readings for:
+---
 
-Wind: Speed and direction.
+## Live Demo
 
-Rain/Precipitation: Forecasted chance and volume.
+https://faraz-ali-1.github.io/Weather-App/
 
-Air Quality Index (AQI): Detailed breakdown of pollutants and overall air health score.
+---
 
-Location Search: Allows users to easily search for and switch between different cities globally.
+## Technical Features
 
-**Technologies Used**
-HTML
-CSS
-JavaScript
+### Live API Integration
+Implemented high-performance asynchronous data fetching using the **Fetch API** and **Async/Await**. The app communicates with the OpenWeatherMap REST API to retrieve temperature, wind speed, humidity, and atmospheric pressure.
 
+### Advanced Localization
+Utilized the **JavaScript Intl API** (`Intl.DisplayNames` and `Intl.DateTimeFormat`) to automatically convert country codes into full names and format unix timestamps into human-readable local dates and times.
 
+### Dynamic UI States
+Developed logic to transform raw API data into visual elements. This includes dynamically updating weather icons, calculating Celsius from Kelvin, and applying custom CSS filters (like drop-shadows) based on specific weather conditions (e.g., cloudy states).
 
-Responsive Design: Optimized for seamless viewing and interaction across desktop, tablet, and mobile devices.
+### Responsive Grid Layout
+Designed a mobile-first "Attributes" grid using CSS Flexbox. The UI intelligently shifts from a multi-column layout on desktops to a centered, high-readability stack on smaller mobile screens.
+
+---
+
+## Technical Challenges
+
+### Data Parsing & Unit Conversion
+The OpenWeatherMap API returns temperatures in Kelvin. I implemented a conversion formula ($$Celsius = Kelvin - 273.15$$) and used `.toFixed()` to ensure the UI remains clean and user-friendly without unnecessary decimal points.
+
+### Error Handling & User Feedback
+To prevent the app from breaking on invalid inputs, I integrated a `try...catch` block around the API request. If a user searches for a city that doesn't exist, the app provides immediate feedback via an alert rather than failing silently.
+
+---
+
+![](https://github.com/Faraz-Ali-1/Weather-App/blob/bf83b9396889956dd50121dcf9dfdc0150a81cec/screenshots/weather%202.jpg)
+
+---
+
+## Tech Stack
+
+* **Logic:** JavaScript (ES6+), Async/Await
+* **API:** OpenWeatherMap REST API
+* **Formatting:** JavaScript Intl API
+* **Icons:** FontAwesome, IonIcons
+* **Styling:** CSS3 (Flexbox, Grid, Custom Variables)
+
+---
+
+## Installation
+
+1. Clone the repository.
+2. Open `index.html` in your browser.
+3. Enter any city name in the search bar to see live weather data.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
